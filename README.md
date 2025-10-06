@@ -180,3 +180,16 @@ SELECT
 FROM 
     DailyPizzaCounts;
 ```
+**-- 10. Determine the top 3 most ordered pizza types based on revenue.**
+```
+SELECT TOP 3 pt.name, SUM(p.price * od.quantity) AS Revenue
+FROM pizza_types pt 
+JOIN pizzas p
+ON pt.pizza_type_id = p.pizza_type_id
+JOIN order_details od
+ON p.pizza_id = od.pizza_id
+GROUP BY pt.name
+ORDER BY Revenue DESC
+```
+
+**-- END OF THE PROJECT**

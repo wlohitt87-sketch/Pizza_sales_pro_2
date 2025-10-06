@@ -101,19 +101,21 @@ SELECT COUNT(order_id) AS Total_sales
 FROM [dbo].[orders]
 ```
 **--2.Calculate the total revenue generated from pizza sales.**
-
+```
 SELECT ROUND(
 SUM(order_details.quantity * pizzas.price),2)
 AS Total_revenue9
 FROM [dbo].[order_details] JOIN [dbo].[pizzas]
 ON order_details.pizza_id = pizzas.pizza_id
-
+```
 **--3. Identify the highest-priced pizza.**
-
-SELECT TOP 1 pizza_id, ROUND (price,2) AS Highest_priced_pizza
+```
+1.SELECT TOP 1 pizza_id, ROUND (price,2) AS Highest_priced_pizza
 FROM [dbo].[pizzas]
 ORDER BY price DESC
-
-SELECT pizza_id, ROUND (price,2) AS Highest_priced_pizza
+```
+```
+2.SELECT pizza_id, ROUND (price,2) AS Highest_priced_pizza
 FROM [dbo].[pizzas]
 WHERE price = (SELECT MAX(price) FROM [dbo].[pizzas])
+```

@@ -119,3 +119,64 @@ ORDER BY price DESC
 FROM [dbo].[pizzas]
 WHERE price = (SELECT MAX(price) FROM [dbo].[pizzas])
 ```
+**--4.Identify the most common pizza size ordered.**
+```
+SELECT size, COUNT(size) AS most_common_Size
+FROM [dbo].[pizzas]
+GROUP BY size
+ORDER BY size DESC
+```
+**--5. List the top 5 most ordered pizza types along with their quantities.**
+```
+SELECT TOP 5 pizza_types.name, SUM(order_details.quantity) AS quantity
+FROM pizza_types JOIN pizzas
+ON pizza_types.pizza_type_id = pizzas.pizza_type_id
+JOIN order_details
+ON pizzas.pizza_id = order_details.pizza_id
+GROUP BY pizza_types.name
+ORDER BY quantity DESC
+```
+**--6. Join the necessary tables to find the total quantity of each pizza category ordered.**
+```
+SELECT  pizza_types.category,SUM (order_details.quantity) AS quantity
+FROM pizza_types JOIN pizzas
+ON pizza_types.pizza_type_id = pizzas.pizza_type_id
+JOIN order_details
+ON pizzas.pizza_id = order_details.pizza_id
+GROUP BY pizza_types.category
+ORDER BY quantity DESC
+```
+**--7. Determine the distribution of orders by hour of the day.**
+```
+SELECT DATEPART(HOUR, time) AS HOUR, COUNT(order_id) AS order_id
+FROM [dbo].[orders]
+GROUP BY DATEPART(HOUR, time)
+ORDER BY HOUR
+```
+**--8. Join relevant tables to find the category-wise distribution of pizzas.**
+```
+SELECT category, COUNT(name) AS Distribution_of_pizzas
+FROM pizza_types
+GROUP BY category
+```
+**--9. Group the orders by date and calculate the average number of pizzas ordered per day.**
+```
+WITH DailyPizzaCounts AS (
+    SELECT 
+        o.date,
+        SUM(od.Quantity) AS TotalPizzas
+    FROM 
+        Orders o
+    JOIN 
+        order_details od 
+	ON o.order_id = od.order_id
+    GROUP BY 
+        o.date
+)
+
+-- Step 2: Calculate average pizzas per day
+SELECT 
+    AVG(TotalPizzas ) AS AvgPizzasPerDay
+FROM 
+    DailyPizzaCounts;
+```

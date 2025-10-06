@@ -192,4 +192,5 @@ GROUP BY pt.name
 ORDER BY Revenue DESC
 ```
 
-**-- END OF THE PROJECT**
+
+## -- END OF THE PROJECT

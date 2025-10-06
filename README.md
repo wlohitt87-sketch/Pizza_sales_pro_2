@@ -10,7 +10,7 @@ The purpose of this project is to showcase the SQL abilities and methods that da
 
 ## Objectives
 
- 1. **Set up a retail sales database**: Create and populate a retail sales database with the provided sales data.
+ 1. **Set up a Pizza sales database**: Create and populate a retail sales database with the provided sales data.
  2. **Data Cleaning**: Identify and remove any records with missing or null values.
  3. **Exploratory Data Analysis (EDA)**: Use simple exploratory data analysis to gain insight into the dataset.
  4. **Business Analysis**: Utilize SQL to extract insights from the sales data and provide answers to particular business issues.
